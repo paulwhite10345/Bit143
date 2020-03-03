@@ -10,7 +10,9 @@ namespace Major_Asignment_3
     {
         public static Random rnd = new Random();
         public static int num;
+        // the static int num is the size of the data set determined by the user.
         public static int max;
+        //static int max is the range of the data set which is also determined by the user.
         public static LinkedList<int> DataList = new LinkedList<int> ();
         static void Main(string[] args)
         {
