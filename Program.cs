@@ -16,12 +16,17 @@ namespace Major_Asignment_3
         {
             //have the program fill a queue with a set number of random integers determined by the user
             Dataset data = new Dataset();
+            Console.WriteLine("Welcome to the duplicate guessing game: \nwhere we ask you to determine a data set size and a range \nAnd ask for you to guess how many duplicate numbers are within that dataset."); 
             Console.Write("\nHow large of a data set would you like: ");
+            //intro text
             num = Int32.Parse(Console.ReadLine());
             Console.Write("\nWhat would you like the maximum range of values to be: ");
             max = Int32.Parse(Console.ReadLine());
             data.constructor(num);
-            data.Parse(max);
+            Console.Write("\nHow many integer values do you think are duplicates?\nyou will have 3 tries to answer\nMaximum value is {0} and there is {1} values in the data set\nWhat is your first guess: ",num,max);
+            data.Userguess(Int32.Parse(Console.ReadLine()), data.Parse(max), 0);
+            Console.WriteLine("");
+            //data.Parse(max);
             BinaryTree tree = new BinaryTree();
             while (DataList.Count != 0)
             {
@@ -45,41 +50,59 @@ namespace Major_Asignment_3
                 int temp = Program.rnd.Next(0,Program.max+1);
                 Data.Enqueue(temp);
             }
-            Console.WriteLine("\n");
+            //Console.WriteLine("\n");
             while (Data.Count > 0)
             {
-                Console.Write("{0} ", Data.Peek());
+                //Console.Write("{0} ", Data.Peek());
                 Program.DataList.AddLast(Convert.ToInt32(Data.Dequeue()));
             }
-            Console.WriteLine("\n");
+            //Console.WriteLine("\n");
         }
-        public void Parse(int num)
+        public void Userguess(int guess, int duplicateCount,int numGuesses)
         {
+            //the userguess method is a recursive method that checks the user inputted value against the value returned by the Parse method which deletes and counts the number of duplicate integer values.
+            int tries = numGuesses;
+            if (guess != duplicateCount & tries == 3)
+            //1st base case which will print an end statement if true.
+            {
+                Console.WriteLine("You currently have {0} tries left and the correct answer was {1}", (numGuesses), duplicateCount);
+                Console.WriteLine("\n\nAfter removing duplicates from the randomized dataset the Linked List contains {0} values ranging from {1} to {2}\n", Program.DataList.Count(), Program.DataList.Min(), Program.DataList.Max());
+            }
+            else if (guess != duplicateCount & tries < 3)
+            {
+                if (guess > duplicateCount)
+                    Console.WriteLine("That guess is incorrect you have {0} more tries and the current guess is higher than the actual result: ", (3-tries));
+                else if (guess < duplicateCount)
+                    Console.WriteLine("That guess is incorrect you have {0} more tries and the current guess is lower than the actual result: ", (3-tries));
+                tries++;
+                Userguess(Int32.Parse(Console.ReadLine()), duplicateCount, tries);
+            }
+            else if (guess == duplicateCount)
+            {
+                Console.WriteLine("{0} that is the correct amount of duplicate values in the randomized data set of {1} values",guess,Program.num);
+                Console.WriteLine("\n\nAfter removing duplicates from the randomized dataset the Linked List contains {0} values ranging from {1} to {2}\n", Program.DataList.Count(), Program.DataList.Min(), Program.DataList.Max());
+            }
+        }
+        public int Parse(int num)
+        {
+            int DuplicateCount = 0;
             if (Program.DataList.Count != 0)
             {
-                Console.WriteLine("\nBefore removing duplicates from the randomized dataset the linked List contains {0} values\n", Program.DataList.Count());
-                Console.Write("Present Values within the List:");
                 for (int i = 0; i <= num; i++)
                 {
                     if (Program.DataList.Contains(i))
                     {
                         while (Program.DataList.Find(i) != Program.DataList.FindLast(i))
                         {
+                            DuplicateCount++;
                             Program.DataList.Remove(Program.DataList.FindLast(i));
                             //removes duplicate ints from the LinkedList, Does not organize them in any way.
                             //organization will be done when the Linked List is sorted to the BST.
                         }
-                        //if (Program.DataList.Find(i) == Program.DataList.FindLast(i))
-                        //{
-                        //    Program.DataList.Remove(Program.DataList.Find(i));
-                        //    Program.DataList.AddLast(i);
-                        //    //reorganizes the list
-                        //}
-                        Console.Write("{0} ", i);
                     }
                 }
-                Console.WriteLine("\n\nAfter removing duplicates from the randomized dataset the Linked List contains {0} values ranging from {1} to {2}\n", Program.DataList.Count(),Program.DataList.Min(),Program.DataList.Max());
             }
+            return DuplicateCount;
         }
     }
     public class ListNode
