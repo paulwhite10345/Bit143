@@ -26,7 +26,6 @@ namespace Major_Asignment_3
             Console.Write("\nHow many integer values do you think are duplicates?\nyou will have 3 tries to answer\nMaximum value is {0} and there is {1} values in the data set\nWhat is your first guess: ",num,max);
             data.Userguess(Int32.Parse(Console.ReadLine()), data.Parse(max), 0);
             Console.WriteLine("");
-            //data.Parse(max);
             BinaryTree tree = new BinaryTree();
             while (DataList.Count != 0)
             {
@@ -50,13 +49,10 @@ namespace Major_Asignment_3
                 int temp = Program.rnd.Next(0,Program.max+1);
                 Data.Enqueue(temp);
             }
-            //Console.WriteLine("\n");
             while (Data.Count > 0)
             {
-                //Console.Write("{0} ", Data.Peek());
                 Program.DataList.AddLast(Convert.ToInt32(Data.Dequeue()));
             }
-            //Console.WriteLine("\n");
         }
         public void Userguess(int guess, int duplicateCount,int numGuesses)
         {
