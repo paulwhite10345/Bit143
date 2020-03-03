@@ -10,7 +10,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 
-namespace Major_Asignment_3
+namespace Guess_The_Duplicate
 {
     class Program
     {
@@ -44,7 +44,7 @@ namespace Major_Asignment_3
             Console.WriteLine("inorder traversal of the constructed binary tree is\n");
             tree.inorderTraversal(node);
             Console.WriteLine("");
-            console.readkey();
+            Console.ReadKey();
         }
     }
     class Dataset
