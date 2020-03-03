@@ -1,4 +1,8 @@
-﻿using System;
+//Paul White / Andrew Pham 
+//3/3/2020
+//Major Assignment 3
+//Utilizing Binary Search Trees
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
