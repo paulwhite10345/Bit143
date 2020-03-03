@@ -1,7 +1,7 @@
 //Paul White / Andrew Pham 
 //Problem Created By Mackenzie Decourcy & Hakan Peterson
 //3/3/2020
-//
+//Purpose of Program: To create a program that randomized a data set that can be used to create a queue by the user, which is then pushed into a linked list while discarding duplicate interger vaules wihtin the data set.
 //Major Assignment 3
 //Utilizing Binary Search Trees
 using System;
@@ -32,7 +32,7 @@ namespace Major_Asignment_3
             max = Int32.Parse(Console.ReadLine());
             data.constructor(num);
             Console.Write("\nHow many integer values do you think are duplicates?\nyou will have 3 tries to answer\nMaximum value is {0} and there is {1} values in the data set\nWhat is your first guess: ",num,max);
-            data.Userguess(Int32.Parse(Console.ReadLine()), data.Parse(max), 0);
+            data.Userguess(Int32.Parse(Console.ReadLine()), data.Parse(max), 1);
             Console.WriteLine("");
             BinaryTree tree = new BinaryTree();
             while (DataList.Count != 0)
@@ -44,6 +44,7 @@ namespace Major_Asignment_3
             Console.WriteLine("inorder traversal of the constructed binary tree is\n");
             tree.inorderTraversal(node);
             Console.WriteLine("");
+            console.readkey();
         }
     }
     class Dataset
@@ -69,7 +70,7 @@ namespace Major_Asignment_3
             if (guess != duplicateCount & tries == 3)
             //1st base case which will print an end statement if true.
             {
-                Console.WriteLine("You currently have {0} tries left and the correct answer was {1}", (numGuesses), duplicateCount);
+                Console.WriteLine("You currently have {0} tries left and the correct answer was {1}", (3- numGuesses), duplicateCount);
                 Console.WriteLine("\n\nAfter removing duplicates from the randomized dataset the Linked List contains {0} values ranging from {1} to {2}\n", Program.DataList.Count(), Program.DataList.Min(), Program.DataList.Max());
             }
             else if (guess != duplicateCount & tries < 3)
